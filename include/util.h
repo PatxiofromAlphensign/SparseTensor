@@ -10,10 +10,12 @@
 #include <span>
 #include <type_traits>
 #include <fmt/format.h>
+
 //#include "format.h"
 //#include "core.h"
 //#include "format-inl.h"
 //#include "format.cc"
+
 using Value = int;
 using std::array;
 namespace SparseTensor {

@@ -54,8 +54,7 @@ namespace SparseTensor {
         return res;
     }
 
-    Matrix KroneckersProduct(const Matrix &v1, const Matrix &v2){
-        Matrix v(v1.size() * v2.size(), std::vector<Value>(v1[0].size() * v2[0].size()));
+    Matrix KroneckersProduct(const Matrix &v1, const Matrix &v2){ Matrix v(v1.size() * v2.size(), std::vector<Value>(v1[0].size() * v2[0].size()));
         for (std::size_t z1(0); z1 < v1.size(); ++z1) {
             for (std::size_t z2(0); z2 < v2.size(); ++z2) {
                 for (std::size_t z3(0); z3 < v1[0].size(); ++z3) {
@@ -100,6 +99,37 @@ namespace SparseTensor {
     }
 
 
+}
 
+std::vector<SparseTensor::Matrix> matrixwrapper() {
 
+    using namespace std;
+    using namespace SparseTensor;
+    std::vector<Matrix> Ret;
+    std::vector<int> veca = {1,2};
+    std::vector<int> vecb = {0,1};
+    Matrix x = {veca, vecb};
+    Matrix y = {vecb, veca};
+    Matrix mat = MatMultiply(x,y);
+    int ii =0;
+    for (std::vector<int> i : mat) {
+        ii++;
+        Matrix ret = {mat[ii++], i};
+        for (int j=0; j<ret.size()*i.size();j++) {
+            ret[j+ret.size()] = i;
+         }
+        Ret[ii] = ret;
+    } 
+    return Ret;
+}
+
+using Tensor = std::vector<std::vector<std::vector<std::vector<double>>>>;
+
+Tensor tensorwrapper(SparseTensor::Matrix m) {
+    Tensor res;
+    res.resize(m.size());
+}
+
+int main() {
+    matrixwrapper();    
 }
